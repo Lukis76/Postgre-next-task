@@ -16,7 +16,8 @@ export default async (req, res) => {
       // y con WHERE seleccionamos el id de la tarea que se encuentra en la url
       // en esta seccion tenemos dos query pero no son iguales
       // ya que el query de conn.query es una promesa de la base de datos
-      // y el quer.id_task es una promesa de la url // (id_task) es el nombre de la ruta relativa de next.js
+      // y el quer.id_task es una promesa de la url 
+      // (id_task) es el nombre de la ruta relativa de next.js
       const result = await conn.query('SELECT * FROM task WHERE id = $1', [
         query.id_task,
       ])
@@ -51,7 +52,8 @@ export default async (req, res) => {
       // y con WHERE seleccionamos el id de la tarea que se encuentra en la url
       // en esta seccion tenemos dos query pero no son iguales
       // ya que el query de conn.query es una promesa de la base de datos
-      // y el quer.id_task es una promesa de la url // (id_task) es el nombre de la ruta relativa de next.js
+      // y el quer.id_task es una promesa de la url 
+      // (id_task) es el nombre de la ruta relativa de next.js
       const result = await conn.query(
         'UPDATE task SET title=$1, description=$2 WHERE id = $3 RETURNING *',
         [title, description, query.id_task]
@@ -79,7 +81,8 @@ export default async (req, res) => {
       // borramos la tarea (task) con el id que se encuentra en la url
       // en esta seccion tenemos dos query pero no son iguales
       // ya que el query de conn.query es una promesa de la base de datos
-      // y el quer.id_task es una promesa de la url // (id_task) es el nombre de la ruta relativa de next.js
+      // y el quer.id_task es una promesa de la url 
+      // (id_task) es el nombre de la ruta relativa de next.js
       const result = await conn.query(
         'DELETE FROM task WHERE id = $1 RETURNING *',
         [query.id_task]
