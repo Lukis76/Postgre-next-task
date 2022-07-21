@@ -6,7 +6,8 @@ export default async (req, res) => {
 
   if (method === 'GET') {
     try {
-      const response = await conn.query('SELECT * FROM task') // seleccionamos la tabla de tareas (task) y seleccionamos todos los campos de la tabla
+      // seleccionamos la tabla de tareas (task) y seleccionamos todos los campos de la tabla
+      const response = await conn.query('SELECT * FROM task') 
       return res.status(200).json(response.rows)
     } catch (error) {
       console.log(error)
@@ -15,11 +16,9 @@ export default async (req, res) => {
 
   if (method === 'POST') {
     try {
-      const comand =
-        'INSERT INTO task (title, description) VALUES ($1, $2) RETURNING *'
-
+      const comand ='INSERT INTO task (title, description) VALUES ($1, $2) RETURNING *'
       const respuesta = await conn.query(comand, [title, description])
-      console.log(respuesta.rows[0])
+      // console.log(respuesta.rows[0])
 
       return res.status(200).json({
         message: 'Peticion POST ==> created task',
@@ -34,18 +33,12 @@ export default async (req, res) => {
   }
 
   if (method === 'PUT') {
-    return res.status(200).json({
-      message: 'Peticion PUT',
-    })
+    return res.status(200).json({message: 'Peticion PUT',})
   }
   if (method === 'DELETE') {
-    return res.status(200).json({
-      message: 'Peticion DELETE',
-    })
+    return res.status(200).json({message: 'Peticion DELETE',})
   }
   if (method !== 'GET' || 'POST' || 'PUT' || 'DELETE') {
-    return res.status(400).json({
-      message: 'Peticion INVALID',
-    })
+    return res.status(400).json({message: 'Peticion INVALID',})
   }
 }
