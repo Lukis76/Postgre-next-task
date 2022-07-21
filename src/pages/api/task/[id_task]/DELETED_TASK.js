@@ -1,4 +1,4 @@
-import { conn } from '../../../../utils/db'
+import { conn } from 'src/utils/db'
 
 export const DELETED_TASK = async (query, res) => {
   try {

@@ -1,4 +1,4 @@
-import { conn } from '../../../utils/db'
+import { conn } from 'src/utils/db'
 
 export default async (req, res) => {
   const { method, body } = req

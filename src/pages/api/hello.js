@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { conn } from '../../utils/db'
+import { conn } from 'src/utils/db'
 
 export default async (req, res) => {
   

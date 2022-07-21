@@ -1,4 +1,4 @@
-import { conn } from '../../../../utils/db'
+import { conn } from 'src/utils/db'
 
 export const GET_TASK = async (query, res) => {
   try {
