@@ -19,7 +19,7 @@ export default function newPage() {
   }
 
   const createTask = async () => {
-    const res = await fetch('http://localhost:3000/api/task', {
+    await fetch('http://localhost:3000/api/task', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,9 +52,11 @@ export default function newPage() {
           />
           <label htmlFor='description'>Description:</label>
           <textarea
+            constentEditable='true'
             placeholder='ingresa description'
             name='description'
             onChange={handleChenge}
+            role='textbox'
           />
           <div>
             <button type='submit'>Submit</button>
@@ -62,49 +64,65 @@ export default function newPage() {
         </form>
       </section>
       <style jsx>{`
-
         section {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           align-items: center;
+          margin-top: 4rem;
+          width: min-content;
+          padding: 2rem;
+          background: #fefefefe;
+          border-radius: 1rem;
         }
-
         form {
-          width: : auto;
-          min-width: 300px;
+          min-width: 25rem;
           display: flex;
           flex-direction: column;
           align-items: center;
         }
         label {
+          font-weight: bold;
           width: 100%;
           margin-bottom: 0.5rem;
         }
-        input, textarea {
+        input,
+        textarea {
           width: 100%;
+          min-width: 25rem;
+          min-height: 3rem;
+          height: auto;
           padding: 0.5rem;
-          border: 1px solid #2575D0;
-          border-radius: 3px;
+          border: 1px solid #2575d0;
+          border-radius: 0.3rem;
           margin-bottom: 0.5rem;
+          outline: none;
+          /* resize: none; */
         }
-
+        textarea {
+          min-height: 8rem;
+          overflow: hidden;
+        }
+        textarea::-webkit-scrollbar {
+          width: 0px;
+        }
         div {
           width: 100%;
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
         }
-
         button {
-          padding: 0.5rem;
+          /* text-transform: uppercase; */
+          font-size: 1.2rem;
+          font-weight: bold;
+          padding: 0.5rem 1rem;
           border: 1px solid #ccc;
-          border-radius: 3px;
-          margin-bottom: 0.5rem;
-          margin-rigth: 0;
+          border-radius: 0.5rem;
+          margin-top: 1rem;
+          background: #2575d0dd;
+          cursor: pointer;
         }
-
-      
       `}</style>
     </>
   )

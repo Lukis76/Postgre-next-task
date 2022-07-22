@@ -17,36 +17,36 @@ export default function home(props) {
         </Head>
 
         <main>
-          <ListTasks tasks={props.tasks} />
           <section>
             <div className='cont-addTask'>
               <button onClick={createNewTask}>Crear tarea</button>
             </div>
           </section>
+          <ListTasks tasks={props.tasks} />
         </main>
       </div>
       <style jsx>{`
         .container {
-          min-height: 100vh;
+          height: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
         }
         main {
           width: 100%;
           height: 100%;
-          background: #288ba8;
           padding: 0.5rem;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
           justify-content: center;
           align-items: center;
         }
         section {
           width: 100%;
-          min-height: 150px;
           height: 100%;
+          min-height: 10rem;
+          max-height: 17rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -61,13 +61,13 @@ export default function home(props) {
           justify-content: center;
           align-items: center;
           border: 1px solid #fff;
-          border-radius: 8px;
+          border-radius: 0.5rem;
         }
         button {
           background: #2575d0;
           color: #fff;
           border: none;
-          border-radius: 8px;
+          border-radius: 0.5rem;
           padding: 1rem;
           font-size: 1.5rem;
         }
@@ -79,8 +79,6 @@ export default function home(props) {
 export const getServerSideProps = async () => {
   const res = await fetch('http://localhost:3000/api/task')
   const data = await res.json()
-
-  // console.log(data);
 
   return {
     props: {
