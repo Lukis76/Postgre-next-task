@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { noData } from 'pg-protocol/dist/messages'
 
 export default function newPage() {
   const router = useRouter()
@@ -28,20 +29,43 @@ export default function newPage() {
     })
   }
 
+  const loadTask = async (id) => {
+    const res = await fetch(`http://localhost:3000/api/task/${id}`)
+    const data = await res.json()
+    console.log(data)
+    setTask({ title: data.title, description: data.description })
+  }
+
+  const updateTask = async (id, task) => {
+    await fetch(`http://localhost:3000/api/task/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await createTask(task)
+      if (typeof router.query.edit === 'string')
+        updateTask(router.query.edit, task)
+      if (!router.query.edit) await createTask(task)
       router.push('/')
     } catch (error) {
       console.log(error)
     }
   }
 
+  useEffect(() => {
+    if (typeof router.query.edit === 'string') loadTask(router.query.edit)
+  }, [router.query])
+
   return (
     <>
       <section>
-        <h1>New Task</h1>
+        {router.query.edit ? <h2>Edit Task</h2> : <h2>New Task</h2>}
         <form onSubmit={handleSubmit}>
           <label htmlFor='title'>Title:</label>
           <input
@@ -49,6 +73,7 @@ export default function newPage() {
             placeholder='ingresa title'
             name='title'
             onChange={handleChenge}
+            value={task.title}
           />
           <label htmlFor='description'>Description:</label>
           <textarea
@@ -56,10 +81,19 @@ export default function newPage() {
             placeholder='ingresa description'
             name='description'
             onChange={handleChenge}
-            role='textbox'
+            value={task.description}
           />
           <div>
-            <button type='submit'>Submit</button>
+            {router.query.edit ? (
+              <>
+                <button className='clear'>Clear</button>
+                <button className='edit' type='submit'>
+                  Edit
+                </button>
+              </>
+            ) : (
+              <button type='submit'>Create</button>
+            )}
           </div>
         </form>
       </section>
@@ -81,13 +115,19 @@ export default function newPage() {
           flex-direction: column;
           align-items: center;
         }
+        h2 {
+          font-size: 2rem;
+        }
         label {
+          font-size: 1.4rem;
           font-weight: bold;
           width: 100%;
           margin-bottom: 0.5rem;
         }
         input,
         textarea {
+          font-size: 1.2rem;
+          font-weight: 500;
           width: 100%;
           min-width: 25rem;
           min-height: 3rem;
@@ -103,18 +143,16 @@ export default function newPage() {
           min-height: 8rem;
           overflow: hidden;
         }
-        textarea::-webkit-scrollbar {
-          width: 0px;
-        }
         div {
           width: 100%;
           display: flex;
           flex-direction: row;
-          justify-content: flex-end;
+          ${router.query.edit
+            ? 'justify-content: space-between;'
+            : 'justify-content: flex-end;'}
         }
         button {
-          /* text-transform: uppercase; */
-          font-size: 1.2rem;
+          font-size: 1.5rem;
           font-weight: bold;
           padding: 0.5rem 1rem;
           border: 1px solid #ccc;
@@ -122,6 +160,12 @@ export default function newPage() {
           margin-top: 1rem;
           background: #2575d0dd;
           cursor: pointer;
+        }
+        .clear {
+          background: #f00;
+        }
+        .edit {
+          background: #257333dd;
         }
       `}</style>
     </>

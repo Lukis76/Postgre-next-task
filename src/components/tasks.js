@@ -1,4 +1,11 @@
+import { useRouter } from 'next/router'
+
+
+
 export const ListTasks = ({ tasks }) => {
+
+  const router = useRouter()
+
   return (
     <>
       {tasks.length === 0 ? (
@@ -8,9 +15,9 @@ export const ListTasks = ({ tasks }) => {
           </div>
         </section>
       ) : (
-        tasks.reverse().map((task) => (
+        tasks.map((task) => (
           <section>
-            <div key={task.id}>
+            <div key={task.id} onClick={() => {router.push(`/task/edit/${task.id}`)}}>
               <h3>{task.title}</h3>
               <p>{task.description}</p>
               {task.created_on && (

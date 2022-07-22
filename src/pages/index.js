@@ -1,11 +1,18 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { ListTasks } from 'src/components/tasks'
 
-export default function home(props) {
+export default function home({tasks}) {
+  const [use, setUse] = useState(tasks)
   const router = useRouter()
 
   const createNewTask = () => router.push('/task/new')
+
+  useEffect(() => {
+    setUse(tasks)
+
+  }, tasks)
 
   return (
     <>
@@ -22,7 +29,7 @@ export default function home(props) {
               <button onClick={createNewTask}>Crear tarea</button>
             </div>
           </section>
-          <ListTasks tasks={props.tasks} />
+          <ListTasks tasks={use.reverse()} />
         </main>
       </div>
       <style jsx>{`
