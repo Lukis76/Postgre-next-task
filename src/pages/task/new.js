@@ -67,22 +67,26 @@ export default function newPage() {
       <section>
         {router.query.edit ? <h2>Edit Task</h2> : <h2>New Task</h2>}
         <form onSubmit={handleSubmit}>
-          <label htmlFor='title'>Title:</label>
-          <input
-            type='text'
-            placeholder='ingresa title'
-            name='title'
-            onChange={handleChenge}
-            value={task.title}
-          />
-          <label htmlFor='description'>Description:</label>
-          <textarea
-            constentEditable='true'
-            placeholder='ingresa description'
-            name='description'
-            onChange={handleChenge}
-            value={task.description}
-          />
+          <label htmlFor='title'>
+            Title:
+            <input
+              type='text'
+              placeholder='ingresa title'
+              name='title'
+              onChange={handleChenge}
+              value={task.title}
+            />
+          </label>
+          <label htmlFor='description'>
+            Description:
+            <textarea
+              constentEditable='true'
+              placeholder='ingresa description'
+              name='description'
+              onChange={handleChenge}
+              value={task.description}
+            />
+          </label>
           <div>
             {router.query.edit ? (
               <>
@@ -92,7 +96,7 @@ export default function newPage() {
                 </button>
               </>
             ) : (
-              <button type='submit'>Create</button>
+              <button className='create' type='submit'>Create</button>
             )}
           </div>
         </form>
@@ -134,10 +138,9 @@ export default function newPage() {
           height: auto;
           padding: 0.5rem;
           border: 1px solid #2575d0;
-          border-radius: 0.3rem;
+          border-radius: 0.4rem;
           margin-bottom: 0.5rem;
           outline: none;
-          /* resize: none; */
         }
         textarea {
           min-height: 8rem;
@@ -158,14 +161,22 @@ export default function newPage() {
           border: 1px solid #ccc;
           border-radius: 0.5rem;
           margin-top: 1rem;
+          background: #2575d0ff;
+        }
+        .create:hover {
           background: #2575d0dd;
-          cursor: pointer;
         }
         .clear {
           background: #f00;
         }
+        .clear:hover {
+          background: #f00000bb;
+        }
         .edit {
           background: #257333dd;
+        }
+        .edit:hover {
+          background: #257333aa;
         }
       `}</style>
     </>
