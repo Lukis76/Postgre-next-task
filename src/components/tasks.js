@@ -13,6 +13,9 @@ export const ListTasks = ({ tasks }) => {
             <div key={task.id}>
               <h3>{task.title}</h3>
               <p>{task.description}</p>
+              {task.created_on && (
+                <small>{new Date(task.created_on).toLocaleDateString()}</small>
+              )}
             </div>
           </section>
         ))
@@ -22,6 +25,7 @@ export const ListTasks = ({ tasks }) => {
           width: 100%;
           height: 100%;
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
           padding: 0.5rem;
@@ -43,6 +47,11 @@ export const ListTasks = ({ tasks }) => {
           overflow: hidden;
           width: 95%;
           text-align: center;
+        }
+        small {
+          text-align: end;
+          width: 95%;
+          font-size: 0.7rem;
         }
       `}</style>
     </>

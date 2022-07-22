@@ -45,6 +45,7 @@ export default function home(props) {
         }
         section {
           width: 100%;
+          min-height: 150px;
           height: 100%;
           display: flex;
           justify-content: center;
