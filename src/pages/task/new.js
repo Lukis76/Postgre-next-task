@@ -6,6 +6,7 @@ import { Modal } from 'src/components/modal'
 export default function newPage(props) {
 
   console.log(process.env.NEXT_PUBLIC_URL_CLIENT)
+  console.log(process.env.PORT);
   const router = useRouter()
 
   const [modal, setModal] = useState(false)
@@ -25,7 +26,7 @@ export default function newPage(props) {
   }
 
   const createTask = async () => {
-    await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task`, {
+    await fetch(`${process.env.NEXT_PUBLIC__VERCEL_URL || 'http://localhost:3000'}/api/task`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,14 +36,14 @@ export default function newPage(props) {
   }
 
   const loadTask = async (id) => {
-    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC__VERCEL_URL || 'http://localhost:3000'}/api/task/${id}`)
     const data = await res.json()
     // console.log(data)
     setTask({ title: data.title, description: data.description })
   }
 
   const updateTask = async (id, task) => {
-    await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task/${id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC__VERCEL_URL || 'http://localhost:3000'}/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
