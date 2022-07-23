@@ -1,23 +1,27 @@
 import { useRouter } from 'next/router'
 
-
-
-export const ListTasks = ({ tasks }) => {
+export const ListTasks = ({tasks}) => {
+  const tas = tasks.sort((a, b) => {
+    return b.id - a.id
+  })
 
   const router = useRouter()
 
   return (
     <>
-      {tasks.length === 0 ? (
+      {tas.length === 0 ? (
         <section>
           <div>
             <h2>No hay tareas</h2>
           </div>
         </section>
       ) : (
-        tasks.map((task) => (
-          <section>
-            <div key={task.id} onClick={() => {router.push(`/task/edit/${task.id}`)}}>
+        tas.map((task) => (
+          <section key={task.id}>
+            <div
+              onClick={() => {
+                router.push(`/task/edit/${task.id}`)
+              }}>
               <h3>{task.title}</h3>
               <p>{task.description}</p>
               {task.created_on && (
@@ -69,6 +73,9 @@ export const ListTasks = ({ tasks }) => {
           text-align: end;
           width: 95%;
           font-size: 0.7rem;
+        }
+        h3 p {
+          cursor:none;
         }
       `}</style>
     </>

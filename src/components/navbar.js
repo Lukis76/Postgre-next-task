@@ -32,13 +32,17 @@ export const NavBar = () => {
           cursor: pointer;
         }
         button {
-          text-transform: uppercase;
-          font-weight: bold;
+          font-size: 1.5rem;
+          /* text-transform: uppercase; */
+          font-weight: 800;
           background: #2575d0;
           padding: 0.5rem 1rem;
           border: none;
           border-radius: .3rem;
-          cursor: pointer;
+          /* cursor: pointer; */
+        }
+        button:hover {
+          background: #257fff;
         }
       `}</style>
     </>

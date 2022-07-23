@@ -80,7 +80,6 @@ export default function newPage() {
           <label htmlFor='description'>
             Description:
             <textarea
-              constentEditable='true'
               placeholder='ingresa description'
               name='description'
               onChange={handleChenge}
@@ -90,13 +89,13 @@ export default function newPage() {
           <div>
             {router.query.edit ? (
               <>
-                <button className='clear'>Clear</button>
-                <button className='edit' type='submit'>
-                  Edit
-                </button>
+                <button onClick={()=> router.push('/')} className='clear'>Clear</button>
+                <button onClick={()=> router.push('/')} className='edit'>Edit</button>
               </>
             ) : (
-              <button className='create' type='submit'>Create</button>
+              <button className='create' type='submit'>
+                Create
+              </button>
             )}
           </div>
         </form>
