@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Modal } from 'src/components/modal'
+// import PORT from " /.env "
 
-export default function newPage() {
+export default function newPage(props) {
+
+  console.log(process.env.NEXT_PUBLIC_URL_CLIENT)
   const router = useRouter()
 
   const [modal, setModal] = useState(false)
@@ -22,7 +25,7 @@ export default function newPage() {
   }
 
   const createTask = async () => {
-    await fetch(`http://localhost:${PORT}/api/task`, {
+    await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,14 +35,14 @@ export default function newPage() {
   }
 
   const loadTask = async (id) => {
-    const res = await fetch(`http://localhost:${PORT}/api/task/${id}`)
+    const res = await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task/${id}`)
     const data = await res.json()
     // console.log(data)
     setTask({ title: data.title, description: data.description })
   }
 
   const updateTask = async (id, task) => {
-    await fetch(`http://localhost:${PORT}/api/task/${id}`, {
+    await fetch(`http://localhost:${process.env.NEXT_PUBLIC_URL_CLIENT}/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -199,4 +202,12 @@ export default function newPage() {
       `}</style>
     </>
   )
+}
+
+
+export const getStaticsProps = () => {
+  // console.log(process.env.PORT)
+  return {
+    props: {}
+  }
 }
