@@ -212,3 +212,5 @@ export const getStaticsProps = () => {
     props: {}
   }
 }
+
+
