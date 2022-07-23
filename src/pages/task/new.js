@@ -22,7 +22,7 @@ export default function newPage() {
   }
 
   const createTask = async () => {
-    await fetch('http://localhost:3000/api/task', {
+    await fetch(`http://localhost:${PORT}/api/task`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,14 +32,14 @@ export default function newPage() {
   }
 
   const loadTask = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/task/${id}`)
+    const res = await fetch(`http://localhost:${PORT}/api/task/${id}`)
     const data = await res.json()
     // console.log(data)
     setTask({ title: data.title, description: data.description })
   }
 
   const updateTask = async (id, task) => {
-    await fetch(`http://localhost:3000/api/task/${id}`, {
+    await fetch(`http://localhost:${PORT}/api/task/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
