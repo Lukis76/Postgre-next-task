@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { ListTasks } from 'src/components/tasks'
+import { ListTasks } from 'src/components/listTasks'
 
 export default function home({ tasks }) {
   const router = useRouter()

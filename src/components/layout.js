@@ -1,14 +1,16 @@
 import { NavBar } from './navbar'
+import { Modal } from './modal'
 
 export const Layout = ({ children }) => {
   return (
     <>
-      <div>
+      <section>
         <NavBar />
         {children}
-      </div>
+        {/* <Modal /> */}
+      </section>
       <style jsx>{`
-        div {
+        section {
           width: 100%;
           height: 100%;
           background: #2575d0;

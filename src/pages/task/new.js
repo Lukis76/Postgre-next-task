@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { noData } from 'pg-protocol/dist/messages'
+import { Modal } from 'src/components/modal'
 
 export default function newPage() {
   const router = useRouter()
+
+  const [modal, setModal] = useState(false)
 
   const [task, setTask] = useState({
     title: '',
@@ -32,7 +34,7 @@ export default function newPage() {
   const loadTask = async (id) => {
     const res = await fetch(`http://localhost:3000/api/task/${id}`)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     setTask({ title: data.title, description: data.description })
   }
 
@@ -89,8 +91,18 @@ export default function newPage() {
           <div>
             {router.query.edit ? (
               <>
-                <button onClick={()=> router.push('/')} className='clear'>Clear</button>
-                <button onClick={()=> router.push('/')} className='edit'>Edit</button>
+                <button
+                  onClick={() => setModal(!modal)}
+                  className='clear'
+                  type='button'>
+                  Clear
+                </button>
+                <button
+                  onClick={() => router.push('/')}
+                  className='edit'
+                  type='submit'>
+                  Edit
+                </button>
               </>
             ) : (
               <button className='create' type='submit'>
@@ -100,6 +112,13 @@ export default function newPage() {
           </div>
         </form>
       </section>
+
+      <Modal
+        isOpen={modal}
+        onClose={setModal}
+        id={typeof router.query.edit === 'string' && router.query.edit}
+      />
+
       <style jsx>{`
         section {
           display: flex;
